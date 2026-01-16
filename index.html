@@ -135,30 +135,38 @@
 
         .intro-float {
             position: absolute;
-            animation: floatUp 8s ease-in-out infinite;
-            opacity: 0.6;
+            bottom: -50px;
+            animation: floatUp var(--duration, 8s) linear infinite;
+            animation-delay: var(--delay, 0s);
+            opacity: 0;
         }
 
         @keyframes floatUp {
-
-            0%,
-            100% {
-                transform: translateY(100vh) rotate(0deg);
+            0% {
+                transform: translateY(0) rotate(0deg);
                 opacity: 0;
             }
 
-            10% {
-                opacity: 0.6;
+            5% {
+                opacity: 0.7;
             }
 
-            90% {
-                opacity: 0.6;
+            95% {
+                opacity: 0.7;
             }
 
             100% {
-                transform: translateY(-50px) rotate(360deg);
+                transform: translateY(-110vh) rotate(360deg);
                 opacity: 0;
             }
+        }
+
+        /* Intro Rain Effect */
+        #introRainCanvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .intro-content {
@@ -578,6 +586,7 @@
 
     <!-- INTRO SCREEN -->
     <div id="introScreen">
+        <canvas id="introRainCanvas"></canvas>
         <div class="intro-bg"></div>
         <div class="stars" id="stars"></div>
         <div class="intro-particles" id="introParticles"></div>

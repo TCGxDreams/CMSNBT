@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initIntroScreen();
     createStars();
     createIntroParticles();
+    initIntroRain();
 });
 
 // ========================================
@@ -189,18 +190,93 @@ function createIntroParticles() {
 
     const emojis = ['🦛', '🎉', '🎆', '🌸', '⭐', '✨'];
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
         const p = document.createElement('span');
         p.className = 'intro-float';
         p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+        const duration = 8 + Math.random() * 6;
+        const delay = Math.random() * duration; // Staggered start
+
         p.style.cssText = `
-            left: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * 8}s;
-            animation-duration: ${6 + Math.random() * 4}s;
-            font-size: ${1 + Math.random()}rem;
+            left: ${5 + Math.random() * 90}%;
+            --duration: ${duration}s;
+            --delay: ${delay}s;
+            font-size: ${1 + Math.random() * 1.2}rem;
         `;
         container.appendChild(p);
     }
+}
+
+// ========================================
+// INTRO RAIN EFFECT
+// ========================================
+let introRainCanvas, introRainCtx, introRainDrops = [];
+
+function initIntroRain() {
+    introRainCanvas = document.getElementById('introRainCanvas');
+    if (!introRainCanvas) return;
+
+    introRainCtx = introRainCanvas.getContext('2d');
+    resizeIntroRainCanvas();
+    window.addEventListener('resize', resizeIntroRainCanvas);
+
+    createIntroRainDrops();
+    animateIntroRain();
+}
+
+function resizeIntroRainCanvas() {
+    if (introRainCanvas) {
+        introRainCanvas.width = window.innerWidth;
+        introRainCanvas.height = window.innerHeight;
+        createIntroRainDrops();
+    }
+}
+
+function createIntroRainDrops() {
+    introRainDrops = [];
+    const count = Math.floor(window.innerWidth / 15);
+
+    for (let i = 0; i < count; i++) {
+        introRainDrops.push({
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            length: 10 + Math.random() * 20,
+            speed: 3 + Math.random() * 4,
+            opacity: 0.1 + Math.random() * 0.3
+        });
+    }
+}
+
+function animateIntroRain() {
+    if (!introRainCtx || !introRainCanvas) return;
+
+    // Check if intro screen still exists
+    const introScreen = document.getElementById('introScreen');
+    if (!introScreen || introScreen.classList.contains('hidden')) {
+        introRainCtx.clearRect(0, 0, introRainCanvas.width, introRainCanvas.height);
+        return; // Stop animation
+    }
+
+    introRainCtx.clearRect(0, 0, introRainCanvas.width, introRainCanvas.height);
+
+    introRainDrops.forEach(drop => {
+        introRainCtx.beginPath();
+        introRainCtx.moveTo(drop.x, drop.y);
+        introRainCtx.lineTo(drop.x, drop.y + drop.length);
+        introRainCtx.strokeStyle = `rgba(255, 255, 255, ${drop.opacity})`;
+        introRainCtx.lineWidth = 1;
+        introRainCtx.stroke();
+
+        drop.y += drop.speed;
+
+        if (drop.y > introRainCanvas.height) {
+            drop.y = -drop.length;
+            drop.x = Math.random() * introRainCanvas.width;
+        }
+    });
+
+    requestAnimationFrame(animateIntroRain);
 }
 
 // ========================================
