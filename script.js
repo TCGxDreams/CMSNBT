@@ -5,17 +5,17 @@
 
 // Configuration
 const CONFIG = {
-    name: "[Tên Bạn]",
-    age: "?",
+    name: "Nguyễn Đoàn Mình An",
+    age: "18",
     unlockDate: "2026-01-17T00:00:00+07:00",
-    specialMessage: `"Hôm nay là ngày đặc biệt của bạn! Cảm ơn vì đã là một người bạn tuyệt vời. Chúc bạn sinh nhật thật hạnh phúc! 🎉🦛"`,
+    specialMessage: `"Mình An ơi, chúc mừng sinh nhật bạn thân! 🎉 Mong bạn luôn khỏe mạnh, hết đau dạ dày đường tiêu nha! Chúc bạn năm nay thi đậu Y Dược hoặc RMIT với học bổng xịn xò! Cám ơn vì đã là người bạn tuyệt vời nhất! 🦛💪"`,
     signature: "— Người bạn thân 🦛",
-    heroSubtitle: "Một ngày thật đặc biệt! 🦛🎉",
+    heroSubtitle: "Chúc mừng 18 tuổi! 🦛🎉",
     numberOfCandles: 3,
     rainText: "T1 Peyz",
     rainColor: "#ffd700",
     introMessage: "Chúc mừng sinh nhật",
-    introSubtext: "✦ T1 PEYZ ✦"
+    introSubtext: "✦ MÌNH AN ✦"
 };
 
 // State
