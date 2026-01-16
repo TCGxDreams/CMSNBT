@@ -8,8 +8,18 @@ const CONFIG = {
     name: "Nguyễn Đoàn Minh An",
     age: "18",
     unlockDate: "2026-01-17T00:00:00+07:00",
-    specialMessage: `"Minh An ơi, chúc mừng sinh nhật bạn thân! 🎉 Mong bạn luôn khỏe mạnh, hết đau dạ dày đường tiêu nha! Chúc bạn năm nay thi đậu Y Dược hoặc RMIT với học bổng xịn xò! Cám ơn vì đã là người bạn tuyệt vời nhất! 🦛💪"`,
-    signature: "— Người bạn thân 🦛",
+    specialMessage: `Gửi Minh An,
+
+Hôm nay là ngày của bạn — một năm mới bắt đầu, và tôi muốn gửi đến bạn những lời chúc chân thành nhất! 🎉
+
+Chúc bạn một năm tràn đầy sức khỏe — cái dạ dày "khó tính" kia cuối cùng cũng chịu hợp tác, và đường tiêu hóa không còn là nỗi lo mỗi ngày. Bạn xứng đáng được ăn ngon, ngủ yên, và sống thật khỏe mạnh.
+
+Chúc bạn chinh phục được ngôi trường trong mơ — dù là khoác áo blouse trắng ở Y Dược hay tỏa sáng tại RMIT với học bổng xịn sò. Tôi tin bạn sẽ làm được, vì bạn luôn nỗ lực hết mình.
+
+Và trên hết, cảm ơn bạn vì đã là người bạn thân tuyệt vời nhất. Những tháng ngày bên nhau là điều tôi trân trọng vô cùng.
+
+Happy Birthday, Minh An! 🦛💪`,
+    signature: "— SUY 🦛",
     heroSubtitle: "Chúc mừng 18 tuổi! 🦛🎉",
     numberOfCandles: 3,
     rainText: "T1 Peyz",
