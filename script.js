@@ -190,7 +190,7 @@ function createIntroParticles() {
 
     const emojis = ['🦛', '🎉', '🎆', '🌸', '⭐', '✨'];
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 30; i++) {
         const p = document.createElement('span');
         p.className = 'intro-float';
         p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
