@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>🎂 Chúc Mừng Sinh Nhật T1 Peyz! 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* INTRO SCREEN STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #0a0a1a;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #introScreen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+            overflow: hidden;
+        }
+
+        #introScreen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .intro-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.12) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--d) ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .intro-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .intro-float {
+            position: absolute;
+            animation: floatUp 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+
+            0%,
+            100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .intro-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .intro-hippo {
+            font-size: clamp(5rem, 18vw, 10rem);
+            animation: spinHippo 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.5));
+            margin-bottom: 15px;
+        }
+
+        @keyframes spinHippo {
+            0% {
+                transform: rotateY(0deg) scale(1);
+            }
+
+            50% {
+                transform: rotateY(180deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotateY(360deg) scale(1);
+            }
+        }
+
+        .intro-message {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 7vw, 4rem);
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ffd700 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .intro-subtext {
+            font-size: clamp(1rem, 4vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 3px;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .lock-container {
+            margin-top: 30px;
+            padding: 25px 35px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+        }
+
+        .lock-title {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .lock-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .lock-time-item {
+            text-align: center;
+        }
+
+        .lock-time-number {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            font-weight: 600;
+            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1;
+        }
+
+        .lock-time-label {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .lock-separator {
+            font-size: 1.8rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 5px;
+            animation: blink 1s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .intro-buttons {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .enter-btn {
+            padding: 15px 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .enter-btn.locked {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+        }
+
+        .enter-btn.locked::before {
+            content: '🔒 ';
+        }
+
+        .enter-btn.unlocked {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #000;
+            box-shadow: 0 10px 40px rgba(255, 165, 0, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .enter-btn.unlocked::before {
+            content: '🎉 ';
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 10px 40px rgba(255, 165, 0, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 15px 50px rgba(255, 165, 0, 0.6);
+            }
+        }
+
+        .enter-btn.unlocked:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .secret-unlock {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.75rem;
+            cursor: pointer;
+            padding: 8px 15px;
+        }
+
+        .secret-unlock:hover {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        #introMusicBtn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        #introMusicBtn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        #introMusicBtn.playing {
+            animation: musicGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes musicGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        #unlockMessage {
+            padding: 20px;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #mainWrapper {
+            display: none;
+        }
+
+        #mainWrapper.visible {
+            display: block;
+        }
+
+        /* Hidden YouTube Player */
+        .youtube-player {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            top: -100px;
+            left: -100px;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hidden YouTube Player for Music -->
+    <div class="youtube-player">
+        <iframe id="youtubePlayer" width="1" height="1"
+            src="https://www.youtube.com/embed/i54avTdUqwU?autoplay=0&loop=1&playlist=i54avTdUqwU&enablejsapi=1"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- INTRO SCREEN -->
+    <div id="introScreen">
+        <div class="intro-bg"></div>
+        <div class="stars" id="stars"></div>
+        <div class="intro-particles" id="introParticles"></div>
+
+        <button id="introMusicBtn" title="Bật/Tắt nhạc">🎵</button>
+
+        <div class="intro-content">
+            <div class="intro-hippo">🦛</div>
+            <h1 class="intro-message" id="introMessage">Chúc mừng sinh nhật</h1>
+            <p class="intro-subtext" id="introSubtext">✦ T1 PEYZ ✦</p>
+
+            <div class="lock-container" id="lockContainer">
+                <p class="lock-title">🔐 Mở khóa sau</p>
+                <div class="lock-countdown">
+                    <div class="lock-time-item">
+                        <span class="lock-time-number" id="lockHours">00</span>
+                        <span class="lock-time-label">Giờ</span>
+                    </div>
+                    <span class="lock-separator">:</span>
+                    <div class="lock-time-item">
+                        <span class="lock-time-number" id="lockMinutes">00</span>
+                        <span class="lock-time-label">Phút</span>
+                    </div>
+                    <span class="lock-separator">:</span>
+                    <div class="lock-time-item">
+                        <span class="lock-time-number" id="lockSeconds">00</span>
+                        <span class="lock-time-label">Giây</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="unlockMessage" style="display: none;">
+                <p style="font-size: 1.3rem; color: #ffd700;">🎉 ĐÃ MỞ KHÓA! 🎉</p>
+            </div>
+
+            <div class="intro-buttons">
+                <button class="enter-btn locked" id="enterBtn">Vào xem 🦛</button>
+                <button class="secret-unlock" id="secretUnlock">hoặc nhấn để mở trước</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainWrapper">
+        <canvas id="rainCanvas"></canvas>
+        <div class="particles" id="particles"></div>
+        <div class="confetti-container" id="confetti"></div>
+        <div class="fireworks" id="fireworks"></div>
+
+        <main class="main-content" id="mainContent">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="floating-hearts">
+                    <span class="float-heart" style="--delay: 0s; --x: 10%;">🦛</span>
+                    <span class="float-heart" style="--delay: 1.5s; --x: 30%;">🎆</span>
+                    <span class="float-heart" style="--delay: 0.5s; --x: 50%;">🎉</span>
+                    <span class="float-heart" style="--delay: 2s; --x: 70%;">🌸</span>
+                    <span class="float-heart" style="--delay: 1s; --x: 90%;">🦛</span>
+                </div>
+
+                <div class="hero-content">
+                    <div class="sparkle-text">
+                        <h1 class="title animate-title">
+                            Chúc Mừng
+                        </h1>
+                        <h1 class="title animate-title title-2">
+                            Sinh Nhật!
+                        </h1>
+                    </div>
+
+                    <div class="name-container">
+                        <span class="name-emoji">🦛</span>
+                        <h2 class="name" id="birthdayName">[Tên Bạn]</h2>
+                        <span class="name-emoji">🦛</span>
+                    </div>
+
+                    <div class="age-badge">
+                        <div class="age-inner">
+                            <span class="age-number" id="ageNumber">?</span>
+                            <span class="age-text">tuổi</span>
+                        </div>
+                    </div>
+
+                    <p class="hero-subtitle" id="heroSubtitle">Một ngày thật đặc biệt! 🦛🎉</p>
+                </div>
+
+                <div class="scroll-indicator">
+                    <div class="scroll-arrow">↓</div>
+                    <span>Cuộn xuống</span>
+                </div>
+            </section>
+
+            <!-- Wishes Section - 3 Cards Only -->
+            <section class="wishes-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎉 Lời Chúc</h2>
+                    <div class="title-underline"></div>
+                </div>
+
+                <div class="wishes-container">
+                    <div class="wish-card" data-aos="fade-up">
+                        <div class="wish-icon">🌟</div>
+                        <p class="wish-text">Chúc bạn sinh nhật vui vẻ, tràn ngập tiếng cười!</p>
+                    </div>
+                    <div class="wish-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="wish-icon">💪</div>
+                        <p class="wish-text">Luôn mạnh khỏe, thành công và gặp nhiều may mắn!</p>
+                    </div>
+                    <div class="wish-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="wish-icon">🦛</div>
+                        <p class="wish-text">Đạt được mọi mục tiêu và ước mơ trong năm mới!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Premium Cake Section -->
+            <section class="cake-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎂 Thổi Nến Nào!</h2>
+                    <div class="title-underline"></div>
+                </div>
+
+                <div class="cake-container">
+                    <div class="cake-wrapper">
+                        <div class="cake-glow"></div>
+                        <div class="cake-3d" id="cake3d">
+                            <!-- Cake Stand -->
+                            <div class="cake-stand"></div>
+                            <!-- Cake Layers -->
+                            <div class="cake-layer layer-bottom"></div>
+                            <div class="cake-layer layer-middle"></div>
+                            <div class="cake-layer layer-top"></div>
+                            <!-- Decorations -->
+                            <div class="cake-cream"></div>
+                            <div class="cake-berries">
+                                <span>🍓</span><span>🦛</span><span>🍓</span>
+                            </div>
+                            <!-- Candles -->
+                            <div class="candles-container" id="candlesContainer"></div>
+                        </div>
+                    </div>
+
+                    <button class="blow-btn" id="blowBtn">
+                        <span class="btn-text">💨 Thổi Nến!</span>
+                    </button>
+
+                    <p class="cake-instruction">Nhấn để thổi nến 🎉</p>
+                </div>
+            </section>
+
+            <!-- Special Message -->
+            <section class="message-section">
+                <div class="message-container">
+                    <div class="message-card">
+                        <div class="message-emoji">💌</div>
+                        <h3 class="message-title">Lời Nhắn Riêng</h3>
+                        <p class="message-content" id="specialMessage">
+                            "Hôm nay là ngày đặc biệt của bạn! Cảm ơn vì đã là một người bạn tuyệt vời. Chúc bạn sinh
+                            nhật thật hạnh phúc! 🎉"
+                        </p>
+                        <p class="signature">— Người bạn thân 🦛</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-emojis">🦛🎆🎉🌸🦛</div>
+            <p>Made with 🦛 for T1 Peyz</p>
+        </footer>
+
+        <!-- Toggle Buttons -->
+        <button class="music-toggle" id="musicToggle" title="Bật/Tắt nhạc">🎵</button>
+        <button class="rain-toggle" id="rainToggle" title="Bật/Tắt chữ rơi">🌧️</button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
