@@ -22,9 +22,8 @@ MIT License - Xem file [LICENSE](LICENSE)
 
 ## 🎵 Music Credit
 
-Background music: "Spring Day" - BTS  
-YouTube: https://youtu.be/i54avTdUqwU  
-© Big Hit Entertainment
+Background music: "Người Đầu Tiên" - Juky San feat. buitruonglinh  
+YouTube: https://youtu.be/i54avTdUqwU
 
 ---
 
