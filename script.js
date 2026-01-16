@@ -261,6 +261,7 @@ document.head.appendChild(introStyles);
 // ========================================
 function initializeMainApp() {
     setCustomContent();
+    initNavigation();
     initParticles();
     initRainText();
     initCandles();
@@ -270,6 +271,70 @@ function initializeMainApp() {
     initRainToggle();
 
     setTimeout(() => createConfettiBurst(60), 500);
+}
+
+// ========================================
+// NAVIGATION (from Tet reference)
+// ========================================
+function initNavigation() {
+    const navBar = document.getElementById('navBar');
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // Close mobile menu
+                if (navBar) navBar.classList.remove('open');
+            }
+
+            // Update active state
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+
+    // Mobile nav toggle
+    if (navToggle && navBar) {
+        navToggle.addEventListener('click', () => {
+            navBar.classList.toggle('open');
+        });
+    }
+
+    // Navbar background on scroll
+    window.addEventListener('scroll', () => {
+        if (navBar) {
+            navBar.classList.toggle('scrolled', window.scrollY > 50);
+        }
+
+        // Scroll spy - update active nav link
+        const sections = ['hero', 'wishes', 'cake', 'message'];
+        const scrollPos = window.scrollY + 150;
+
+        sections.forEach(id => {
+            const section = document.getElementById(id);
+            if (section) {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }
+        });
+    });
 }
 
 function setCustomContent() {

@@ -8,14 +8,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>🎂 Chúc Mừng Sinh Nhật T1 Peyz! 🎉</title>
+    <meta name="description" content="Website chúc mừng sinh nhật T1 Peyz - Bạn thân!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Great+Vibes&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* INTRO SCREEN STYLES */
+        /* ========================================
+           INTRO SCREEN - PREMIUM LOCK
+           ======================================== */
         * {
             margin: 0;
             padding: 0;
@@ -30,6 +33,30 @@
             background: #0a0a1a;
             font-family: 'Outfit', sans-serif;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Modern Scrollbar (from roadtothefuture) */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ffd700, #ff8c00);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffd700;
+        }
+
+        /* Text Selection */
+        ::selection {
+            background: #ffd700;
+            color: #000;
         }
 
         #introScreen {
@@ -48,6 +75,7 @@
         #introScreen.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
 
         .intro-bg {
@@ -191,13 +219,16 @@
             font-weight: 300;
         }
 
+        /* Glass Panel (from roadtothefuture) */
         .lock-container {
             margin-top: 30px;
             padding: 25px 35px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .lock-title {
@@ -263,6 +294,7 @@
             gap: 12px;
         }
 
+        /* Button with Shimmer (from roadtothefuture) */
         .enter-btn {
             padding: 15px 50px;
             font-size: 1rem;
@@ -271,6 +303,29 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+        }
+
+        .enter-btn.unlocked::after {
+            animation: btnShimmer 2s infinite;
+        }
+
+        @keyframes btnShimmer {
+            100% {
+                transform: translateX(100%);
+            }
         }
 
         .enter-btn.locked {
@@ -318,6 +373,7 @@
             font-size: 0.75rem;
             cursor: pointer;
             padding: 8px 15px;
+            transition: color 0.3s ease;
         }
 
         .secret-unlock:hover {
@@ -389,7 +445,6 @@
             display: block;
         }
 
-        /* Hidden YouTube Player */
         .youtube-player {
             position: fixed;
             width: 1px;
@@ -399,16 +454,126 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* ========================================
+           NAVIGATION (from Tet repo)
+           ======================================== */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-bar.scrolled {
+            background: rgba(10, 10, 26, 0.95);
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, #ff8c00);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover {
+            color: #ffd700;
+        }
+
+        .nav-link:hover::after {
+            width: 60%;
+        }
+
+        .nav-link.active {
+            color: #ffd700;
+        }
+
+        .nav-link.active::after {
+            width: 60%;
+        }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .nav-bar {
+                flex-direction: column;
+                align-items: center;
+                padding: 60px 20px 20px;
+                gap: 10px;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            .nav-bar.open {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Hidden YouTube Player for Music -->
+    <!-- Hidden YouTube Player -->
     <div class="youtube-player">
         <iframe id="youtubePlayer" width="1" height="1"
             src="https://www.youtube.com/embed/i54avTdUqwU?autoplay=0&loop=1&playlist=i54avTdUqwU&enablejsapi=1"
-            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
 
     <!-- INTRO SCREEN -->
@@ -457,6 +622,18 @@
 
     <!-- MAIN CONTENT -->
     <div id="mainWrapper">
+        <!-- Navigation Bar (from Tet) -->
+        <nav class="nav-bar" id="navBar">
+            <a href="#hero" class="nav-link active">🏠 Home</a>
+            <a href="#wishes" class="nav-link">🎉 Lời Chúc</a>
+            <a href="#cake" class="nav-link">🎂 Bánh Kem</a>
+            <a href="#message" class="nav-link">💌 Nhắn Gửi</a>
+        </nav>
+
+        <button class="nav-toggle" id="navToggle">
+            <span></span><span></span><span></span>
+        </button>
+
         <canvas id="rainCanvas"></canvas>
         <div class="particles" id="particles"></div>
         <div class="confetti-container" id="confetti"></div>
@@ -464,7 +641,7 @@
 
         <main class="main-content" id="mainContent">
             <!-- Hero Section -->
-            <section class="hero">
+            <section class="hero" id="hero">
                 <div class="hero-bg"></div>
                 <div class="floating-hearts">
                     <span class="float-heart" style="--delay: 0s; --x: 10%;">🦛</span>
@@ -476,12 +653,8 @@
 
                 <div class="hero-content">
                     <div class="sparkle-text">
-                        <h1 class="title animate-title">
-                            Chúc Mừng
-                        </h1>
-                        <h1 class="title animate-title title-2">
-                            Sinh Nhật!
-                        </h1>
+                        <h1 class="title animate-title">Chúc Mừng</h1>
+                        <h1 class="title animate-title title-2">Sinh Nhật!</h1>
                     </div>
 
                     <div class="name-container">
@@ -506,8 +679,8 @@
                 </div>
             </section>
 
-            <!-- Wishes Section - 3 Cards Only -->
-            <section class="wishes-section">
+            <!-- Wishes Section -->
+            <section class="wishes-section" id="wishes">
                 <div class="section-header">
                     <h2 class="section-title">🎉 Lời Chúc</h2>
                     <div class="title-underline"></div>
@@ -529,8 +702,8 @@
                 </div>
             </section>
 
-            <!-- Premium Cake Section -->
-            <section class="cake-section">
+            <!-- Cake Section -->
+            <section class="cake-section" id="cake">
                 <div class="section-header">
                     <h2 class="section-title">🎂 Thổi Nến Nào!</h2>
                     <div class="title-underline"></div>
@@ -540,40 +713,29 @@
                     <div class="cake-wrapper">
                         <div class="cake-glow"></div>
                         <div class="cake-3d" id="cake3d">
-                            <!-- Cake Stand -->
                             <div class="cake-stand"></div>
-                            <!-- Cake Layers -->
                             <div class="cake-layer layer-bottom"></div>
                             <div class="cake-layer layer-middle"></div>
                             <div class="cake-layer layer-top"></div>
-                            <!-- Decorations -->
                             <div class="cake-cream"></div>
-                            <div class="cake-berries">
-                                <span>🍓</span><span>🦛</span><span>🍓</span>
-                            </div>
-                            <!-- Candles -->
+                            <div class="cake-berries"><span>🍓</span><span>🦛</span><span>🍓</span></div>
                             <div class="candles-container" id="candlesContainer"></div>
                         </div>
                     </div>
 
-                    <button class="blow-btn" id="blowBtn">
-                        <span class="btn-text">💨 Thổi Nến!</span>
-                    </button>
-
+                    <button class="blow-btn" id="blowBtn"><span class="btn-text">💨 Thổi Nến!</span></button>
                     <p class="cake-instruction">Nhấn để thổi nến 🎉</p>
                 </div>
             </section>
 
-            <!-- Special Message -->
-            <section class="message-section">
+            <!-- Message Section -->
+            <section class="message-section" id="message">
                 <div class="message-container">
                     <div class="message-card">
                         <div class="message-emoji">💌</div>
                         <h3 class="message-title">Lời Nhắn Riêng</h3>
-                        <p class="message-content" id="specialMessage">
-                            "Hôm nay là ngày đặc biệt của bạn! Cảm ơn vì đã là một người bạn tuyệt vời. Chúc bạn sinh
-                            nhật thật hạnh phúc! 🎉"
-                        </p>
+                        <p class="message-content" id="specialMessage">"Hôm nay là ngày đặc biệt của bạn! Cảm ơn vì đã
+                            là một người bạn tuyệt vời. Chúc bạn sinh nhật thật hạnh phúc! 🎉"</p>
                         <p class="signature">— Người bạn thân 🦛</p>
                     </div>
                 </div>
